@@ -8,10 +8,10 @@ class CreatePropertyComponent extends Component {
     this.state = {
       id: this.props.match.params.id,
       address: "",
-      propertyType: "",
+      propertyType: "shop",
       floorSpace: 0.0,
       city: "",
-      offerType: "",
+      offerType: "sell",
       price: 0,
     };
     this.changeAddressHandler = this.changeAddressHandler.bind(this);
@@ -112,13 +112,21 @@ class CreatePropertyComponent extends Component {
                   </div>
                   <div className="form-group">
                     <label> Property Type: </label>
-                    <input
+                    {/* <input
                       placeholder="shop/flat/plot"
                       name="propertyType"
                       className="form-control"
                       value={this.state.propertyType}
                       onChange={this.changePropertyTypeHandler}
-                    />
+                    /> */}
+                    <select
+                      value={this.state.propertyType}
+                      onChange={this.changePropertyTypeHandler}
+                    >
+                      <option value="shop">Shop</option>
+                      <option value="flat">Flat</option>
+                      <option value="plot">Plot</option>
+                    </select>
                   </div>
                   <div className="form-group">
                     <label> Floor Space: </label>
@@ -142,13 +150,20 @@ class CreatePropertyComponent extends Component {
                   </div>
                   <div className="form-group">
                     <label> Offer Type: </label>
-                    <input
+                    {/* <input
                       placeholder="sell/rent"
                       name="offerType"
                       className="form-control"
                       value={this.state.offerType}
                       onChange={this.changeOfferTypeHandler}
-                    />
+                    /> */}
+                    <select
+                      value={this.state.offerType}
+                      onChange={this.changeOfferTypeHandler}
+                    >
+                      <option value="sell">Sell</option>
+                      <option value="rent">Rent</option>
+                    </select>
                   </div>
                   <div className="form-group">
                     <label> Price: </label>
