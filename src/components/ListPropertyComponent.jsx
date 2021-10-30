@@ -17,16 +17,16 @@ class ListPropertyComponent extends Component {
     PropertyService.deleteProperty(id).then((res) => {
       this.setState({
         properties: this.state.properties.filter(
-          (property) => property.id !== id
+          (property) => property.propertyId !== id
         ),
       });
     });
   }
   viewProperty(id) {
-    this.props.history.push(`/view-employee/${id}`);
+    this.props.history.push(`/view-property/${id}`);
   }
   editProperty(id) {
-    this.props.history.push(`/add-employee/${id}`);
+    this.props.history.push(`/add-property/${id}`);
   }
 
   componentDidMount() {
@@ -36,7 +36,7 @@ class ListPropertyComponent extends Component {
   }
 
   addProperty() {
-    this.props.history.push("/add-employee/_add");
+    this.props.history.push("/add-property/_add");
   }
 
   render() {
@@ -64,7 +64,7 @@ class ListPropertyComponent extends Component {
             </thead>
             <tbody>
               {this.state.properties.map((property) => (
-                <tr key={property.id}>
+                <tr key={property.propertyId}>
                   <td> {property.address} </td>
                   <td> {property.propertyType}</td>
                   <td> {property.floorSpace}</td>
@@ -73,21 +73,21 @@ class ListPropertyComponent extends Component {
                   <td> {property.price}</td>
                   <td>
                     <button
-                      onClick={() => this.editProperty(property.id)}
+                      onClick={() => this.editProperty(property.propertyId)}
                       className="btn btn-info"
                     >
                       Update{" "}
                     </button>
                     <button
                       style={{ marginLeft: "10px" }}
-                      onClick={() => this.deleteProperty(property.id)}
+                      onClick={() => this.deleteProperty(property.propertyId)}
                       className="btn btn-danger"
                     >
                       Delete{" "}
                     </button>
                     <button
                       style={{ marginLeft: "10px" }}
-                      onClick={() => this.viewProperty(property.id)}
+                      onClick={() => this.viewProperty(property.propertyId)}
                       className="btn btn-info"
                     >
                       View{" "}

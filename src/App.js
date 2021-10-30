@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import CreatePropertyComponent from "./components/CreatePropertyComponent";
 import ListPropertyComponent from "./components/ListPropertyComponent";
 import UpdatePropertyComponent from "./components/UpdatePropertyComponent";
+import ViewPropertyComponent from "./components/ViewPropertyComponent";
 
 function App() {
   return (
@@ -15,9 +16,14 @@ function App() {
         <div className="container">
           <Switch>
             <Route path="/" exact component={ListPropertyComponent}></Route>
+            <Route path="/properties" component={ListPropertyComponent}></Route>
             <Route
               path="/add-property/:id"
               component={CreatePropertyComponent}
+            ></Route>
+            <Route
+              path="/view-property/:id"
+              component={ViewPropertyComponent}
             ></Route>
             <Route
               path="/update-property/:id"
