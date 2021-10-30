@@ -5,6 +5,7 @@ import FooterComponent from "./components/FooterComponent";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import CreatePropertyComponent from "./components/CreatePropertyComponent";
 import ListPropertyComponent from "./components/ListPropertyComponent";
+import UpdatePropertyComponent from "./components/UpdatePropertyComponent";
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
             <Route
               path="/add-property/:id"
               component={CreatePropertyComponent}
+            ></Route>
+            <Route
+              path="/update-property/:id"
+              component={UpdatePropertyComponent}
             ></Route>
           </Switch>
         </div>
