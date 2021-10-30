@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PropertyService from "../services/PropertyService";
+import PropertyService from "../../services/PropertyService";
 
 class ViewPropertyComponent extends Component {
   constructor(props) {

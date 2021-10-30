@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import PropertyService from "../services/PropertyService";
+import PropertyService from "../../services/PropertyService";
 
-class CreatePropertyComponent extends Component {
+class UpdatePropertyComponent extends Component {
   constructor(props) {
     super(props);
 
@@ -23,23 +23,20 @@ class CreatePropertyComponent extends Component {
   }
 
   componentDidMount() {
-    if (this.state.id === "_add") {
-      return;
-    } else {
-      PropertyService.getPropertyById(this.state.id).then((res) => {
-        let property = res.data;
-        this.setState({
-          address: property.address,
-          propertyType: property.propertyType,
-          floorSpace: property.floorSpace,
-          city: property.city,
-          offerType: property.offerType,
-          price: property.price,
-        });
+    PropertyService.getPropertyById(this.state.id).then((res) => {
+      let property = res.data;
+      this.setState({
+        address: property.address,
+        propertyType: property.propertyType,
+        floorSpace: property.floorSpace,
+        city: property.city,
+        offerType: property.offerType,
+        price: property.price,
       });
-    }
+    });
   }
-  saveOrUpdateProperty = (e) => {
+
+  updateProperty = (e) => {
     e.preventDefault();
     let property = {
       address: this.state.address,
@@ -50,17 +47,12 @@ class CreatePropertyComponent extends Component {
       price: this.state.price,
     };
     console.log("property => " + JSON.stringify(property));
-
-    if (this.state.id === "_add") {
-      PropertyService.createProperty(property).then((res) => {
-        this.props.history.push("/properties");
-      });
-    } else {
-      PropertyService.updateProperty(property, this.state.id).then((res) => {
-        this.props.history.push("/properties");
-      });
-    }
+    console.log("id => " + JSON.stringify(this.state.id));
+    PropertyService.updateProperty(property, this.state.id).then((res) => {
+      this.props.history.push("/properties");
+    });
   };
+
   changeAddressHandler = (event) => {
     this.setState({ address: event.target.value });
   };
@@ -79,17 +71,11 @@ class CreatePropertyComponent extends Component {
   changePriceHandler = (event) => {
     this.setState({ price: event.target.value });
   };
+
   cancel() {
     this.props.history.push("/properties");
   }
 
-  getTitle() {
-    if (this.state.id === "_add") {
-      return <h3 className="text-center">Add Property</h3>;
-    } else {
-      return <h3 className="text-center">Update Property</h3>;
-    }
-  }
   render() {
     return (
       <div>
@@ -97,7 +83,7 @@ class CreatePropertyComponent extends Component {
         <div className="container">
           <div className="row">
             <div className="card col-md-6 offset-md-3 offset-md-3">
-              {this.getTitle()}
+              <h3 className="text-center">Update Employee</h3>
               <div className="card-body">
                 <form>
                   <div className="form-group">
@@ -112,13 +98,6 @@ class CreatePropertyComponent extends Component {
                   </div>
                   <div className="form-group">
                     <label> Property Type: </label>
-                    {/* <input
-                      placeholder="shop/flat/plot"
-                      name="propertyType"
-                      className="form-control"
-                      value={this.state.propertyType}
-                      onChange={this.changePropertyTypeHandler}
-                    /> */}
                     <select
                       value={this.state.propertyType}
                       onChange={this.changePropertyTypeHandler}
@@ -150,13 +129,6 @@ class CreatePropertyComponent extends Component {
                   </div>
                   <div className="form-group">
                     <label> Offer Type: </label>
-                    {/* <input
-                      placeholder="sell/rent"
-                      name="offerType"
-                      className="form-control"
-                      value={this.state.offerType}
-                      onChange={this.changeOfferTypeHandler}
-                    /> */}
                     <select
                       value={this.state.offerType}
                       onChange={this.changeOfferTypeHandler}
@@ -175,9 +147,10 @@ class CreatePropertyComponent extends Component {
                       onChange={this.changePriceHandler}
                     />
                   </div>
+
                   <button
                     className="btn btn-success"
-                    onClick={this.saveOrUpdateProperty}
+                    onClick={this.updateProperty}
                   >
                     Save
                   </button>
@@ -198,4 +171,4 @@ class CreatePropertyComponent extends Component {
   }
 }
 
-export default CreatePropertyComponent;
+export default UpdatePropertyComponent;
