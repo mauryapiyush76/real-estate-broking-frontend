@@ -7,7 +7,8 @@ import CreatePropertyComponent from "./components/property/CreatePropertyCompone
 import ListPropertyComponent from "./components/property/ListPropertyComponent";
 import UpdatePropertyComponent from "./components/property/UpdatePropertyComponent";
 import ViewPropertyComponent from "./components/property/ViewPropertyComponent";
-
+import LoginComponent from "./components/usermanagement/LoginComponent";
+import SearchPropertyComponent from "./components/property/SearchPropertyComponent";
 function App() {
   return (
     <div>
@@ -15,6 +16,7 @@ function App() {
         <HeaderComponent />
         <div className="container">
           <Switch>
+            <Route path="/login" component={LoginComponent}></Route>
             <Route path="/" exact component={ListPropertyComponent}></Route>
             <Route path="/properties" component={ListPropertyComponent}></Route>
             <Route
@@ -28,6 +30,10 @@ function App() {
             <Route
               path="/update-property/:id"
               component={UpdatePropertyComponent}
+            ></Route>
+            <Route
+              path="/search-property"
+              component={SearchPropertyComponent}
             ></Route>
           </Switch>
         </div>
