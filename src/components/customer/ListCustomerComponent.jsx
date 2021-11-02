@@ -1,50 +1,52 @@
 import React, { Component } from "react";
-import BrokerService from "../../services/BrokerService";
+import CustomerService from "../../services/CustomerService";
 
 class ListBrokerComponent extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      brokers: [],
+      customers: [],
     };
-    this.addBroker = this.addBroker.bind(this);
-    this.editBroker = this.editBroker.bind(this);
-    this.deleteBroker = this.deleteBroker.bind(this);
+    this.addCustomer = this.addCustomer.bind(this);
+    this.editCustomer = this.editCustomer.bind(this);
+    this.deleteCustomer = this.deleteCustomer.bind(this);
   }
 
-  deleteBroker(id) {
-    BrokerService.deleteBroker(id).then((res) => {
+  deleteCustomer(id) {
+    CustomerService.deleteCustomer(id).then((res) => {
       this.setState({
-        brokers: this.state.brokers.filter((broker) => broker.brokerId !== id),
+        customers: this.state.customers.filter(
+          (broker) => customer.customerId !== id
+        ),
       });
     });
   }
-  viewBroker(id) {
-    this.props.history.push(`/view-broker/${id}`);
+  viewCustomer(id) {
+    this.props.history.push(`/view-customer/${id}`);
   }
-  editBroker(id) {
-    this.props.history.push(`/add-broker/${id}`);
+  editCustomer(id) {
+    this.props.history.push(`/add-customer/${id}`);
   }
 
   componentDidMount() {
-    BrokerService.getBroker().then((res) => {
-      this.setState({ brokers: res.data });
+    CustomerService.getCustomer().then((res) => {
+      this.setState({ customers: res.data });
     });
   }
 
-  addBroker() {
-    this.props.history.push("/add-broker/_add");
+  addCustomer() {
+    this.props.history.push("/add-customer/_add");
   }
 
   render() {
     return (
       <div>
-        <h2 className="text-center">Brokers List</h2>
+        <h2 className="text-center">Customers List</h2>
         <div className="row">
-          <button className="btn btn-primary" onClick={this.addBroker}>
+          <button className="btn btn-primary" onClick={this.addCustomer}>
             {" "}
-            Add Broker
+            Add Customer
           </button>
         </div>
         <br></br>
@@ -59,29 +61,29 @@ class ListBrokerComponent extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.brokers.map((broker) => (
-                <tr key={broker.brokerId}>
-                  <td> {broker.firstName} </td>
-                  <td> {broker.lastName}</td>
-                  <td> {broker.email}</td>
-                  <td> {broker.mobileNumber} </td>
+              {this.state.customers.map((customer) => (
+                <tr key={customer.customerId}>
+                  <td> {customer.firstName} </td>
+                  <td> {customer.lastName}</td>
+                  <td> {customer.email}</td>
+                  <td> {customer.mobileNumber} </td>
                   <td>
                     <button
-                      onClick={() => this.editBroker(broker.brokerId)}
+                      onClick={() => this.editCustomer(customer.customerId)}
                       className="btn btn-info"
                     >
                       Update{" "}
                     </button>
                     <button
                       style={{ marginLeft: "10px" }}
-                      onClick={() => this.deleteBroker(broker.brokerId)}
+                      onClick={() => this.deleteCustomer(customer.customerId)}
                       className="btn btn-danger"
                     >
                       Delete{" "}
                     </button>
                     <button
                       style={{ marginLeft: "10px" }}
-                      onClick={() => this.viewBroker(broker.brokerId)}
+                      onClick={() => this.viewCustomer(customer.customerId)}
                       className="btn btn-info"
                     >
                       View{" "}
@@ -97,4 +99,4 @@ class ListBrokerComponent extends Component {
   }
 }
 
-export default ListBrokerComponent;
+export default ListCustomerComponent;
