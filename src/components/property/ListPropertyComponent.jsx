@@ -31,7 +31,11 @@ class ListPropertyComponent extends Component {
 
   componentDidMount() {
     PropertyService.getProperties().then((res) => {
-      this.setState({ properties: res.data });
+      this.setState({
+        properties: res.data.filter(
+          (property) => property.availableStatus === true
+        ),
+      });
     });
   }
 
@@ -54,6 +58,7 @@ class ListPropertyComponent extends Component {
           <table className="table table-striped table-bordered">
             <thead>
               <tr>
+                <th>ID</th>
                 <th> Address</th>
                 <th> Property Type</th>
                 <th> Floor Space</th>
@@ -65,6 +70,7 @@ class ListPropertyComponent extends Component {
             <tbody>
               {this.state.properties.map((property) => (
                 <tr key={property.propertyId}>
+                  <td> {property.propertyId} </td>
                   <td> {property.address} </td>
                   <td> {property.propertyType}</td>
                   <td> {property.floorSpace}</td>

@@ -40,7 +40,7 @@ class UpdateCustomerComponent extends Component {
     };
     console.log("customer => " + JSON.stringify(customer));
     console.log("id => " + JSON.stringify(this.state.id));
-    customerService.updateCustomer(customer, this.state.id).then((res) => {
+    CustomerService.updateCustomer(customer, this.state.id).then((res) => {
       this.props.history.push("/customers");
     });
   };

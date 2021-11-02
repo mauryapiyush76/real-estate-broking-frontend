@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CustomerService from "../../services/CustomerService";
 
-class ListBrokerComponent extends Component {
+class ListCustomerComponent extends Component {
   constructor(props) {
     super(props);
 
@@ -17,7 +17,7 @@ class ListBrokerComponent extends Component {
     CustomerService.deleteCustomer(id).then((res) => {
       this.setState({
         customers: this.state.customers.filter(
-          (broker) => customer.customerId !== id
+          (customer) => customer.customerId !== id
         ),
       });
     });
@@ -54,6 +54,7 @@ class ListBrokerComponent extends Component {
           <table className="table table-striped table-bordered">
             <thead>
               <tr>
+                <th>ID</th>
                 <th> First Name</th>
                 <th> Last Name</th>
                 <th> Email</th>
@@ -63,6 +64,7 @@ class ListBrokerComponent extends Component {
             <tbody>
               {this.state.customers.map((customer) => (
                 <tr key={customer.customerId}>
+                  <td> {customer.customerId} </td>
                   <td> {customer.firstName} </td>
                   <td> {customer.lastName}</td>
                   <td> {customer.email}</td>
